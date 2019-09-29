@@ -1,7 +1,10 @@
 package com.example.roland.labor1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -10,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     static {
         System.loadLibrary("native-lib");
     }
+    private Button send;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,8 +21,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Example of a call to a native method
-        TextView tv = (TextView) findViewById(R.id.sample_text);
+        TextView tv = (TextView) findViewById(R.id.email);
         tv.setText(stringFromJNI());
+        send =(Button) findViewById(R.id.send);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMain2Activity();
+            }
+        });
+    }
+    public void openMain2Activity(){
+        Intent intent = new Intent(this, Main2Activity.class);
+        startActivity(intent);
     }
 
     /**
